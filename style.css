@@ -1,0 +1,233 @@
+/* Latest Added Card Slot - SillyTavern Extension */
+
+#st_latest_added_card_slot {
+    width: 100%;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    margin: 4px 0 8px 0;
+    border-radius: 10px;
+    border: 1px solid rgba(130, 175, 255, 0.24);
+    background: linear-gradient(135deg, rgba(70, 115, 210, 0.14) 0%, rgba(25, 35, 60, 0.28) 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+body.charListGrid #rm_print_characters_block #st_latest_added_card_slot {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+#st_latest_added_card_slot:hover {
+    border-color: rgba(145, 190, 255, 0.42);
+}
+
+#st_latest_added_card_slot.st_lac_active_char {
+    border-color: rgba(130, 195, 255, 0.55);
+    box-shadow: 0 0 12px rgba(100, 170, 255, 0.22);
+}
+
+@keyframes stLacPulse {
+    0% {
+        border-color: rgba(120, 220, 255, 0.95);
+        box-shadow: 0 0 18px rgba(100, 200, 255, 0.65);
+    }
+    50% {
+        border-color: rgba(120, 220, 255, 0.4);
+        box-shadow: 0 0 6px rgba(100, 200, 255, 0.2);
+    }
+    100% {
+        border-color: rgba(130, 175, 255, 0.24);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+    }
+}
+
+#st_latest_added_card_slot.st_lac_just_imported {
+    animation: stLacPulse 1.6s ease-in-out 3;
+}
+
+/* Header bar inside the slot */
+.st_lac_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 10px;
+    background: rgba(120, 165, 255, 0.10);
+    border-bottom: 1px solid rgba(130, 175, 255, 0.15);
+    font-size: calc(var(--mainFontSize, 15px) * 0.74);
+    line-height: 1.2;
+    user-select: none;
+}
+
+#st_latest_added_card_slot.st_lac_collapsed .st_lac_header {
+    border-bottom: none;
+}
+
+.st_lac_header_left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: rgba(185, 215, 255, 0.95);
+    cursor: pointer;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.st_lac_header_left i.st_lac_badge_icon {
+    color: #7cb3ff;
+    font-size: 0.95em;
+}
+
+.st_lac_header_title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.st_lac_collapsed_preview {
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--SmartThemeBodyColor, #e5e9f0);
+    opacity: 0.85;
+    margin-left: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.st_lac_header_right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+
+.st_lac_time_badge {
+    font-size: 0.92em;
+    color: var(--SmartThemeBodyColor, #ccc);
+    opacity: 0.68;
+    white-space: nowrap;
+}
+
+.st_lac_nav_controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(0, 0, 0, 0.22);
+    border-radius: 5px;
+    padding: 1px 4px;
+}
+
+.st_lac_nav_btn {
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: var(--SmartThemeBodyColor, #ddd);
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.st_lac_nav_btn:hover:not(.disabled) {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.st_lac_nav_btn.disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+.st_lac_nav_index {
+    font-size: 0.88em;
+    opacity: 0.75;
+    padding: 0 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+.st_lac_collapse_btn {
+    cursor: pointer;
+    opacity: 0.65;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: var(--SmartThemeBodyColor, #ddd);
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.st_lac_collapse_btn:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Character card row inside the slot */
+.st_latest_added_card_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 7px;
+    border-radius: 0 0 9px 9px;
+    cursor: pointer;
+    margin-bottom: 0;
+    transition: background-color 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.st_latest_added_card_item:hover {
+    background-color: var(--white30a, rgba(255, 255, 255, 0.15));
+}
+
+.st_latest_added_card_item .avatar {
+    align-self: center;
+    flex-shrink: 0;
+}
+
+body.big-avatars .st_latest_added_card_item .avatar {
+    flex: unset;
+}
+
+.st_latest_added_card_item .character_select_container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Keep normal full-row layout even if character grid view is toggled on */
+body.charListGrid #rm_print_characters_block .st_latest_added_card_item {
+    width: 100%;
+    max-width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+body.charListGrid #rm_print_characters_block .st_latest_added_card_item .character_select_container {
+    width: calc(100% - 70px);
+    max-width: none;
+    justify-content: flex-start;
+}
+
+body.charListGrid #rm_print_characters_block .st_latest_added_card_item .character_name_block {
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: 4px;
+}
+
+body.charListGrid #rm_print_characters_block .st_latest_added_card_item .ch_name {
+    text-align: left;
+    max-width: none;
+    font-size: var(--mainFontSize);
+}
+
+body.charListGrid #rm_print_characters_block .st_latest_added_card_item .ch_description {
+    display: block;
+}
+
+#st_latest_added_card_slot.st_lac_collapsed .st_latest_added_card_item {
+    display: none;
+}
